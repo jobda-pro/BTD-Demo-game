@@ -216,6 +216,19 @@
   </div>
 
   <script>
+
+  try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+        if (audioCtx.destination && audioCtx.destination.channelCount > 1) {
+            audioCtx.destination.channelCount = 1;  // 강제로 모노 출력
+            audioCtx.destination.channelCountMode = "explicit";
+        }
+        console.log("Mono audio context initialized successfully");
+    } catch (e) {
+        console.warn("Audio context init failed:", e);
+    }
+
       // The URL to game.zip, relative to the URL of this file.
       window.gameZipURL = 'game.zip';
 
